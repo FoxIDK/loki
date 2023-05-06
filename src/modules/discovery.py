@@ -1,6 +1,7 @@
 # Imports.
 import sys
 import os
+import json
 from colorama import Fore
 
 # Pre-run.
@@ -31,7 +32,6 @@ def discovery():
             with open('.config/loki_config.json') as f:
                 loki_config = json.load(f)
                 install_dir = loki_config["loki_dir"]
-                vault_dir = loki_config["vault_location"]
 
             print(f"\n{print_question} What directory would you like to probe?")
             dir_probe = input(f"{print_command}")

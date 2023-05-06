@@ -32,18 +32,16 @@ def keygen():
         with open(".config/loki_config.json") as f:
             loki_config = json.load(f)
             install_dir = loki_config["loki_dir"]
-            vault_dir = loki_config["vault_location"]
 
         os.chdir(os.path.expanduser("~"))
         print(f"\n{print_question} Do you want to back up your current key? [Y/n]")
         option = input(f"{print_command}")
-        key_path = f'{install_dir}/var/pipes/loki.key'
         option = option.lower()
 
         # Backup key
         if option == 'y':
             os.chdir(os.path.expanduser("~"))
-            with open(f"loki/var/pipes/loki.key",'r') as loki_key:
+            with open("loki/var/pipes/loki.key",'r') as loki_key:
                 print(f"\n{print_prompt} Previous key: {loki_key.read()}")
                 os.system(f'cp {install_dir}/var/pipes/loki.key {install_dir}/var/pipes/loki.key.bk')
 
