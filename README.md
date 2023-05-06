@@ -2,7 +2,7 @@
 
 ![Logo](https://media.discordapp.net/attachments/1066955501910364170/1099833309258842193/loki.png?width=425&height=425)
 
-## 🚀 About Loki
+## 🚀 About Loki | [![Codacy Badge](https://app.codacy.com/project/badge/Grade/4e6eb5c93e3242c7894e47349b6df69c)](https://app.codacy.com/gh/FoxIDK/loki/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 Loki was created to help protect individuals and organizations, such as [reporters without borders](https://rsf.org/en), who face censorship and surveillance when trying to release information from blacked out regions. With the potential for [government media blackouts](https://en.wikipedia.org/wiki/Media_blackout) increasing, Loki provides a form of resistance against state, government, and corporate control of our data. By using encryption to vault files before uploading, users can take control of their data and protect their freedoms even when using the cloud. Additionally, knowing your rights and freedoms in the EU can help individuals fight back against manipulation and control!
 

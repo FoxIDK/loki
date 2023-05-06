@@ -1,6 +1,5 @@
 # Imports.
 import sys
-import time
 import json
 import os
 from colorama import Fore
@@ -33,7 +32,6 @@ def decrypt():
             with open('.config/loki_config.json') as f:
                 loki_config = json.load(f)
                 install_dir = loki_config["loki_dir"]
-                vault_dir = loki_config["vault_location"]
 
             print(f"\n{print_question} What directory would you like to decrypt?\n")
             dir_decrypt = input(f"{print_command}")

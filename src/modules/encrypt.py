@@ -1,7 +1,6 @@
 # Imports.
 import sys
 import json
-import time
 import os
 from colorama import Fore
 
@@ -33,7 +32,6 @@ def encrypt():
             with open('.config/loki_config.json') as f:
                 loki_config = json.load(f)
                 install_dir = loki_config["loki_dir"]
-                vault_dir = loki_config["vault_location"]
 
             print(f"\n{print_question} What directory would you like to encrypt?\n")
             dir_encrypt = input(f"{print_command}")

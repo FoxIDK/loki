@@ -1,6 +1,5 @@
 # Imports.
 import sys
-import time
 import os
 from colorama import Fore
 import json

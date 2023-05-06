@@ -2,7 +2,6 @@
 import sys
 import os
 from colorama import Fore
-from pathlib import Path
 from cryptography.fernet import Fernet
 import json
 

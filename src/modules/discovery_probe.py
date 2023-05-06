@@ -1,8 +1,6 @@
 # Imports.
 import sys
 import os
-from pathlib import Path
-from cryptography.fernet import Fernet
 
 # Hide tracebacks - change to 1 for dev mode.
 sys.tracebacklimit = 0

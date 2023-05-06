@@ -8,11 +8,8 @@ import sys
 import os
 from colorama import Fore
 import argparse
-from pathlib import Path
-from cryptography.fernet import Fernet
 
 # Modules.
-import src.modules.discovery as discovery
 import src.modules.encrypt as encrypt
 import src.modules.decrypt as decrypt
 import src.modules.vault as vault

@@ -1,10 +1,8 @@
 # Imports.
 import os
 import sys
-import time
 import json
 from colorama import Fore
-from pathlib import Path
 from cryptography.fernet import Fernet
 
 # Pre-run.
