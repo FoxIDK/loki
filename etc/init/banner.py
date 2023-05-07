@@ -1,10 +1,11 @@
-import secrets
+# Imports.
 import sys
 import os
 from colorama import Fore
 import random
 
-version = ("3.8.9") # Major.Minor.Rev/Build
+# Program.
+version = ("3.9.12") # Major.Minor.Rev/Build
 motd = (f"{Fore.YELLOW}The god of mischief{Fore.WHITE}") # Always use 20 char max.
 tag = ['              (Did you know, Loki can be used for host-defensive?)', '              (Loki is the world eaters father Pagan and Norse folklore!)'] # Use spaces to centre the tag to the divider bar.
 

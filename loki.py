@@ -1,8 +1,3 @@
-# Threading.
-from multiprocessing.dummy import Pool as ThreadPool
-# Makes the little workers!
-threads = ThreadPool(8)
-
 # Imports.
 import sys
 import os
@@ -37,6 +32,11 @@ print_alert =  (f"{Fore.WHITE}[{Fore.LIGHTRED_EX}!{Fore.WHITE}]") # Alert output
 print_exited = (f"{Fore.WHITE}[{Fore.LIGHTRED_EX}EXITED{Fore.WHITE}]") # Execited output.
 print_disconnected = (f"{Fore.WHITE}[{Fore.LIGHTRED_EX}DISCONNECTED{Fore.WHITE}]") # Disconnected output.
 print_command = (f"\n[{Fore.YELLOW}>_{Fore.WHITE}]: ") # Always asks for a command on a new line.
+
+# Dummy threading.
+from multiprocessing.dummy import Pool as ThreadPool
+# Makes the little workers!
+threads = ThreadPool(8)
 
 # Benchmark, uncomment lines 45-46 and 116-117 if you want to benchmark.
 #from time import perf_counter
