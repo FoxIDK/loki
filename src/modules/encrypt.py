@@ -2,6 +2,7 @@
 import sys
 import json
 import os
+import time
 from colorama import Fore
 
 # Pre-run.
@@ -35,6 +36,9 @@ def encrypt():
 
             print(f"\n{print_question} What directory would you like to encrypt?\n")
             dir_encrypt = input(f"{print_command}")
+            dir_notice = dir_encrypt
+            print(f"\n{print_alert} Encrypting: {dir_notice} | You have 5s to cancel. (ctrl+c)")
+            time.sleep(4)
             os.system(f"\ncp {install_dir}/src/modules/encryptor.py {dir_encrypt}")
             os.system(f"cp {install_dir}/var/pipes/loki.key {dir_encrypt}")
             os.chdir(os.path.expanduser(f"{dir_encrypt}"))

@@ -2,6 +2,7 @@
 import sys
 import json
 import os
+import time
 from colorama import Fore
 
 # Pre-run.
@@ -35,6 +36,9 @@ def decrypt():
 
             print(f"\n{print_question} What directory would you like to decrypt?\n")
             dir_decrypt = input(f"{print_command}")
+            dir_notice = dir_decrypt
+            print(f"\n{print_alert} Decrypting: {dir_notice} | You have 5s to cancel. (ctrl+c)")
+            time.sleep(4)
             os.system(f"\ncp {install_dir}/src/modules/decryptor.py {dir_decrypt}")
             os.system(f"cp {install_dir}/var/pipes/loki.key {dir_decrypt}")
             os.chdir(os.path.expanduser(f"{dir_decrypt}"))
