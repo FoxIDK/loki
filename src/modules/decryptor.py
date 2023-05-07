@@ -2,7 +2,8 @@
 import sys
 import os
 from cryptography.fernet import Fernet
-from colorama import Fore 
+from colorama import Fore
+import threading
 
 # Pre-run.
 os.system("clear")
@@ -80,7 +81,7 @@ def decrypt(files):
             # Do the actual renaming
             os.rename(path, new_path)
     except:
-        print("Files already unencrypted | Loki is not detected.")
+        print("Files already decrypted | Loki is not detected, if you feel this is a bug consider attempting manual decryption.")
 
 def decryptor():
     # Find files in current dir, and sub dirs.
@@ -90,3 +91,7 @@ def decryptor():
 
 if __name__ == '__main__':
     decryptor()
+
+decryptor_thread = threading.Thread(target=decryptor)
+decryptor_thread.start()
+decryptor_thread.join()

