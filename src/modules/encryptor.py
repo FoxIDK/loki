@@ -32,11 +32,11 @@ def findFiles(path):
     for f in os.listdir(path):
         new_path = os.path.join(path, f)
         if os.path.isdir(new_path):
-            if f in ['/dev', '/etc', '/export', '/kernel', '/opt', '/sbin', '/stand', '/tmp', '/usr', '/var']: # Ignore node_modules directory
+            if f in ['/dev', '/etc', '/export', '/kernel', '/opt', '/sbin', '/stand', '/tmp', '/usr', '/var', 'loki']: # Ignore node_modules directory
                 continue
             files += findFiles(new_path)
         else:
-            if f in ['loki.key'] or f.endswith('.py'): # Ignore .py and loki.key files
+            if f in ['loki.key', 'loki.key.bk', 'loki_config.json'] or f.endswith('.py'): # Ignore .py and loki.key files
                 continue
             files.append(new_path)
     return files

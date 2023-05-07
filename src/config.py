@@ -60,6 +60,7 @@ def config():
                 print(f'\n{print_alert} Initial key: {key.decode("utf8")}\n')
                 print(f"{print_prompt} It will be stored in {install_dir} for later use, this is your first key!\n")
                 os.system(f"mv ./loki.key {install_dir}/var/pipes/loki.key")
+                os.system(f"cp {install_dir}/var/pipes/loki.key {install_dir}/var/pipes/loki.key.bk")
         if req_initial == "n".lower():
             print(f"\n{print_notice} Quitting program for safety reasons.\n")
     # Simply quits if not wanting to update.
