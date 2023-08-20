@@ -6,7 +6,7 @@
 
 Loki was created to help protect individuals and organizations, such as [reporters without borders](https://rsf.org/en), who face censorship and surveillance when trying to release information from blacked out regions. With the potential for [government media blackouts](https://en.wikipedia.org/wiki/Media_blackout) increasing, Loki provides a form of resistance against state, government, and corporate control of our data. By using encryption to vault files before uploading, users can take control of their data and protect their freedoms even when using the cloud. Additionally, knowing your rights and freedoms in the EU can help individuals fight back against manipulation and control!
 
-This is why tools it's been adopted into the [CSI; Linux](https://csilinux.com/) operating system, built with [Debian](https://www.debian.org/) in mind and above all else supported by community like [Foxden](https://discord.gg/H4CjUqHm3Q) and the global [societal security guild](https://www.discord.gg/SAmAPUSzug).
+This is among the reasons as to why it's been adopted into the [CSI; Linux](https://csilinux.com/) operating system, built with [Debian](https://www.debian.org/) in mind and above all else supported by communities like [Foxden](https://discord.gg/H4CjUqHm3Q) and the global [societal security guild](https://www.discord.gg/SAmAPUSzug).
 
 ## ✨ Features
 
@@ -39,7 +39,7 @@ As Loki rapidly approaches the 4.x.x benchmark intended for _stable-release_ the
 
 You can report a vulnerability or major problem by joining our Discord [*here*](https://discord.gg/H4CjUqHm3Q) and open a ticket.
 
-Explain in detail the vulnerability or major problem in as much detail as possible, _if anyone can help - we will_.
+Explain in detail the vulnerability or major problem in as much detail as possible.
 
 ## 🕸 Contributors
 

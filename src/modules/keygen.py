@@ -1,14 +1,14 @@
 # Imports.
 import sys
 import os
+import subprocess
 from colorama import Fore
 from cryptography.fernet import Fernet
 import json
+from datetime import datetime
 
 # Pre-run.
-#os.system("clear")
-
-# Hide tracebacks - change to 1 for dev mode.
+subprocess.run("clear", shell=True)
 sys.tracebacklimit = 0
 
 # Config (Prints).
@@ -34,16 +34,18 @@ def keygen():
             install_dir = loki_config["loki_dir"]
 
         os.chdir(os.path.expanduser("~"))
-        print(f"\n{print_question} Do you want to back up your current key? [Y/n]")
+        print(f"\n{print_question} Do you want to back up your current key? [Y/n]: ")
         option = input(f"{print_command}")
         option = option.lower()
 
         # Backup key
+        current_datetime = datetime.now()
+        dt = current_datetime.strftime("%d-%m-%Y_%H-%M-%S")  # Format: YYYY-MM-DD_HH-MM-SS
         if option == 'y':
             os.chdir(os.path.expanduser("~"))
             with open("loki/var/pipes/loki.key",'r') as loki_key:
                 print(f"\n{print_prompt} Previous key: {loki_key.read()}")
-                os.system(f'cp {install_dir}/var/pipes/loki.key {install_dir}/var/pipes/loki.key.bk')
+                subprocess.run(['cp', f"{install_dir}/var/pipes/loki.key", f"{install_dir}/var/pipes/recovery/loki_{dt}.key"])
 
             gen_key = "loki.key"
             # Generate new key
@@ -51,7 +53,7 @@ def keygen():
                 key = Fernet.generate_key()
                 loki_key.write(key)
                 print(f'\n{print_alert} New key: {key.decode("utf8")}\n')
-                os.system(f"mv ./loki.key {install_dir}/var/pipes/loki.key")
+                subprocess.run(['mv', './loki.key', f"{install_dir}/var/pipes/loki.key"])
 
         if option == 'n':
             print(f'\n{print_exited} {print_notice} {print_successfully}\n')
@@ -61,13 +63,13 @@ def keygen():
         print(f"\n{print_exited} {print_notice} {print_successfully}")
         print(f'{print_notice} You interrupted the program.\n')
         try:
-            sys.exit(0)
+            os._exit(0); sys.exit(0)
         except SystemExit:
-            os._exit(0)
+            os._exit(0); sys.exit(0)
     except ValueError:
         print(f"\n{print_exited} {print_notice} {print_successfully}")
         print(f'{print_notice} You entered invalid data into a field.\n')
         try:
-            sys.exit(0)
+            os._exit(0); sys.exit(0)
         except SystemExit:
-            os._exit(0)
+            os._exit(0); sys.exit(0)

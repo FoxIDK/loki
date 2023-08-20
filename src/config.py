@@ -1,14 +1,13 @@
 # Imports.
 import os
+import subprocess
 import sys
 import json
 from colorama import Fore
 from cryptography.fernet import Fernet
 
 # Pre-run.
-os.system("clear")
-
-# Hide tracebacks - change to 1 for dev mode.
+subprocess.run("clear")
 sys.tracebacklimit = 0
 
 # Config (Prints).
@@ -25,14 +24,15 @@ print_exited = (f"{Fore.WHITE}[{Fore.LIGHTRED_EX}EXITED{Fore.WHITE}]") # Execite
 print_disconnected = (f"{Fore.WHITE}[{Fore.LIGHTRED_EX}DISCONNECTED{Fore.WHITE}]") # Disconnected output.
 print_command = (f"\n[{Fore.YELLOW}>_{Fore.WHITE}]: ") # Always asks for a command on a new line.
 
+# Program.
 def config():
-    confirmation = input(f"\n{print_alert} Do you want to continue, this will overwrite previous config [y/n]: ")
+    confirmation = input(f"\n{print_alert} This will overwrite previous config, are you sure? [Y/n]: ")
     if confirmation == "y" or confirmation == "Y":
         os.chdir(os.path.expanduser("~"))
-        # Requests full path for configuration file.
+        
         install_dir = input(f"\n{print_question} Loki directory (Example: ~/loki): ")
         vault_dir = input(f"\n{print_question} Full vault path (Local): ")
-        # Don't touch this, it works for some reason.
+        
         loki_config = {
             "config_check": "updated",
             "loki_dir": install_dir,
@@ -40,16 +40,17 @@ def config():
         }
         with open("loki_config.json", "w") as outfile:
             json.dump(loki_config, outfile, indent=1)
-        # Checks for update valid.
+        
         with open(f'loki_config.json') as f:
             data = json.load(f)
-            update_verify = ("config_check")
+            update_verify = "config_check"
             if update_verify in data:
-                print(f"\n{print_notice} Config have been", loki_config[update_verify], f"{print_successfully}!")
+                print(f"\n{print_notice} Config has been {loki_config[update_verify]} {print_successfully}!")
             else:
-                print(f"\n{print_alert} Config has {print_failed}!.")
-        # Asks if they have an initial key.
-        os.system(f"mv ./loki_config.json ~/.config/loki_config.json")
+                print(f"\n{print_alert} Config has {print_failed}!")
+        
+        subprocess.run(["mv", "./loki_config.json", "~/.config/loki_config.json"], capture_output=True, text=True)
+        
         req_initial = input(f"\n{print_question} Do you need an initial key? [y/n]: ")
         if req_initial == "y".lower():
             initial_key = "loki.key"
@@ -59,13 +60,15 @@ def config():
                 loki_key.write(key)
                 print(f'\n{print_alert} Initial key: {key.decode("utf8")}\n')
                 print(f"{print_prompt} It will be stored in {install_dir} for later use, this is your first key!\n")
-                os.system(f"mv ./loki.key {install_dir}/var/pipes/loki.key")
-                os.system(f"cp {install_dir}/var/pipes/loki.key {install_dir}/var/pipes/loki.key.bk")
+                
+                subprocess.run(["mv", "./loki.key", f"{install_dir}/var/pipes/loki.key"], capture_output=True, text=True)
+                subprocess.run(["cp", f"{install_dir}/var/pipes/loki.key", f"{install_dir}/var/pipes/loki.key.bk"], capture_output=True, text=True)
+        
         if req_initial == "n".lower():
             print(f"\n{print_notice} Quitting program for safety reasons.\n")
-    # Simply quits if not wanting to update.
     if confirmation == "n" or confirmation == "N":
         print(f"\n{print_notice} Quitting program for safety reasons.\n")
+
 # Run apicon.
 if __name__ == '__main__':
     config()

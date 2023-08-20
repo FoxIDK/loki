@@ -1,6 +1,7 @@
 # Imports.
 import sys
 import os
+import subprocess
 from colorama import Fore
 import argparse
 
@@ -11,12 +12,9 @@ import src.modules.vault as vault
 import src.modules.keygen as keygen
 import src.config as config
 import etc.init.banner as banner
-import src.main as main
 
 # Pre-run.
-os.system("clear")
-
-# Hide tracebacks - change to 1 for dev mode.
+subprocess.run("clear")
 sys.tracebacklimit = 0
 
 # Config (Prints).
@@ -38,18 +36,19 @@ from multiprocessing.dummy import Pool as ThreadPool
 # Makes the little workers!
 threads = ThreadPool(8)
 
-# Benchmark, uncomment lines 45-46 and 116-117 if you want to benchmark.
+# Benchmark, remember to uncomment in `if __name__ == '__main__':` at the end.
 #from time import perf_counter
 #start = perf_counter()
 
 # Arg parser.
 parser = argparse.ArgumentParser()
 ap = parser.add_mutually_exclusive_group()
-ap.add_argument('-encrypt',     help='Encrypt specified directory.',    action="store_true")
-ap.add_argument('-decrypt',     help='Decrypt specified directory.',    action="store_true")
-ap.add_argument('-vault',       help='Access the Vault Control Panel.', action="store_true")
-ap.add_argument('-keygen',      help='Generate a key.',                 action="store_true")
-ap.add_argument('-config',      help='Configure Loki.',                 action="store_true")
+ap.add_argument('-encrypt', help='Encrypt specified directory.',    action="store_true")
+ap.add_argument('-decrypt', help='Decrypt specified directory.',    action="store_true")
+ap.add_argument('-vault',   help='Access the Vault Control Panel.', action="store_true")
+ap.add_argument('-keygen',  help='Generate a key.',                 action="store_true")
+ap.add_argument('-recovery',help='Recovery system, in-dev.',        action="store_true")
+ap.add_argument('-config',  help='Configure Loki.',                 action="store_true")
 args = vars(parser.parse_args())
 
 # Args.
@@ -58,55 +57,54 @@ if args['encrypt']: # Runs the encrypt program.
         try:
             os.chdir(os.path.expanduser("~"))
             encrypt.encrypt()
-            os._exit(0)
+            os._exit(0); sys.exit(0)
         except:
             print(f"{print_prompt} {print_failed}: Encrypt failed to run here!\n")
-            os._exit(0)
+            os._exit(0); sys.exit(0)
 
 if args['decrypt']: # Runs the decrypt program.
     while True:
         try:
             os.chdir(os.path.expanduser("~"))
             decrypt.decrypt()
-            os._exit(0)
+            os._exit(0); sys.exit(0)
         except:
             print(f"{print_prompt} {print_failed}: Decrypt failed to run here!\n")
-            os._exit(0)
+            os._exit(0); sys.exit(0)
 
 if args['vault']: # Runs the keygen program.
     while True:
         try:
             os.chdir(os.path.expanduser("~"))
             vault.vault() 
-            os._exit(0)
+            os._exit(0); sys.exit(0)
         except:
             print(f"{print_prompt} {print_failed}: Vault failed to run here!\n")
-            os._exit(0)
+            os._exit(0); sys.exit(0)
 
 if args['keygen']: # Runs the keygen program.
     while True:
         try:
             os.chdir(os.path.expanduser("~"))
             keygen.keygen()
-            os._exit(0)
+            os._exit(0); sys.exit(0)
         except:
             print(f"{print_prompt} {print_failed}: Keygen failed to run here!\n")
-            os._exit(0)
+            os._exit(0); sys.exit(0)
 
 if args['config']: # Runs the keygen program.
     while True:
         try:
             os.chdir(os.path.expanduser("~"))
             config.config()
-            os._exit(0)
+            os._exit(0); sys.exit(0)
         except:
             print(f"{print_prompt} {print_failed}: Config failed to run here!\n")
-            os._exit(0)
+            os._exit(0); sys.exit(0)
 
 # Program.
 if __name__ == '__main__':
     try:
-        # Uncomment line 88 for banner.
         #banner.banner() # Shows the banner.
         threads.close()
         threads.join()
@@ -117,8 +115,8 @@ if __name__ == '__main__':
         print(f"\n{print_exited} {print_notice} {print_successfully}\n")
         print(f'{print_notice} You interrupted the program.\n')
         try:
-            sys.exit(0)
+            os._exit(0); sys.exit(0)
         except SystemExit:
-            os._exit(0)
+            os._exit(1); sys.exit(1)
     except FileNotFoundError as not_found:
         print("This file is missing:" + not_found.filename)

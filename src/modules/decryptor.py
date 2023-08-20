@@ -1,14 +1,13 @@
 # Imports.
 import sys
 import os
+import subprocess
 from cryptography.fernet import Fernet
 from colorama import Fore
 import threading
 
 # Pre-run.
-os.system("clear")
-
-# Hide tracebacks - change to 1 for dev mode.
+subprocess.run("clear", shell=True)
 sys.tracebacklimit = 0
 
 # Config (Prints).

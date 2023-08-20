@@ -5,7 +5,7 @@ from colorama import Fore
 import random
 
 # Program.
-version = ("3.9.12") # Major.Minor.Rev/Build
+version = ("3.10.1") # Major.Minor.Rev/Build
 motd = (f"{Fore.YELLOW}The god of mischief{Fore.WHITE}") # Always use 20 char max.
 tag = ['              (Did you know, Loki can be used for host-defensive?)', '              (Loki is the world eaters father Pagan and Norse folklore!)'] # Use spaces to centre the tag to the divider bar.
 
@@ -62,8 +62,7 @@ def banner():
         print(random.choice(tag))
 
     except KeyboardInterrupt:
-        print(f'\n{Fore.YELLOW}You interrupted the program.{Fore.WHITE}')
         try:
-            sys.exit(0)
+            os._exit(0); sys.exit(0)
         except SystemExit:
-            os._exit(0)
+            os._exit(1); sys.exit(1)

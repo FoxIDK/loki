@@ -2,13 +2,12 @@
 import sys
 import json
 import os
+import subprocess
 import time
 from colorama import Fore
 
 # Pre-run.
-os.system("clear")
-
-# Hide tracebacks - change to 1 for dev mode.
+subprocess.run("clear", shell=True)
 sys.tracebacklimit = 0
 
 # Config (Prints).
@@ -34,17 +33,18 @@ def encrypt():
                 loki_config = json.load(f)
                 install_dir = loki_config["loki_dir"]
 
-            print(f"\n{print_question} What directory would you like to encrypt?\n")
-            dir_encrypt = input(f"{print_command}")
+            print(f"\n{print_question} What directory would you like to encrypt: ")
+            dir_encrypt = input(f"{print_command}~/")
             dir_notice = dir_encrypt
             print(f"\n{print_alert} Encrypting: {dir_notice} | You have 5s to cancel. (ctrl+c)")
             time.sleep(4)
-            os.system(f"\ncp {install_dir}/src/modules/encryptor.py {dir_encrypt}")
-            os.system(f"cp {install_dir}/var/pipes/loki.key {dir_encrypt}")
-            os.chdir(os.path.expanduser(f"{dir_encrypt}"))
-            os.system(f"python3 {dir_encrypt}/encryptor.py")
-            os.system("rm encryptor.py")
-            os.system("rm loki.key")
+
+            subprocess.run(['cp', f"{install_dir}/src/modules/encryptor.py", dir_encrypt])
+            subprocess.run(['cp', f"{install_dir}/var/pipes/loki.key", dir_encrypt])
+            os.chdir(os.path.expanduser(dir_encrypt))
+            subprocess.run(['python3', "encryptor.py"])
+            os.remove("encryptor.py")
+            os.remove("loki.key")
             print(f"\n{print_exited} {print_notice} {print_successfully}\n")
 
 # Error handling.
@@ -52,15 +52,15 @@ def encrypt():
             print(f"\n{print_exited} {print_notice} {print_successfully}\n")
             print(f'{print_notice} You interrupted the program.\n')
             try:
-                sys.exit(0)
+                os._exit(0); sys.exit(0)
             except SystemExit:
-                os._exit(0)
+                os._exit(0); sys.exit(0)
         except ValueError:
             print(f"\n{print_exited} {print_notice} {print_successfully}")
             print(f'\n{print_notice} You entered invalid data into a field.\n')
             try:
-                sys.exit(0)
+                os._exit(0); sys.exit(0)
             except SystemExit:
-                os._exit(0)
+                os._exit(0); sys.exit(0)
         except FileNotFoundError as not_found:
             print("This file is missing:" + not_found.filename)
